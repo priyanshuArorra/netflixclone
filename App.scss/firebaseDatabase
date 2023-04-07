@@ -1,0 +1,19 @@
+...
+import { firebaseDatabase } from "../../firebase/firebase";
+
+
+function Row() {
+  ...
+  const leafRoot = 'movies';
+  const fetchMovies = (movieType) => {
+    const movieRef = firebaseDatabase.ref(`${leafRoot}/${movieType}`);
+    movieRef.on("value", (snapshot) => {
+      const movies = snapshot.val();
+      if (movies && movies.length !== 0) {
+        setMovies(() => movies);
+      }
+    });
+  };
+  ...
+}
+...
